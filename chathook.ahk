@@ -1,10 +1,15 @@
 ;
-;  Hook keyboard input and send it to Parsec Soda app
+;  Hook keyboard input and send it to Parsec Soda.
+;
+;  The chat input box must be selected in Soda for it to work.
+;  Will not be able to prevent input from all apps.
+;
+;  Ctrl+Shift+C to activate
 ;
 
 guiPositionX := 10
 guiPositionY := 10
-inputWidth := 700
+guiWidth := 700
 backgroundColor := "000000"
 fontSize := 16
 fontColor := "00FF00"
@@ -23,7 +28,7 @@ SetKeyDelay, 100, 100
 Gui +LastFound +AlwaysOnTop -Caption +ToolWindow
 Gui, Color, %backgroundColor%, %backgroundColor%
 Gui, Font, s%fontSize%
-Gui, Add, Text, vMyText w%inputWidth% c%fontColor%
+Gui, Add, Text, vMyText w%guiWidth% c%fontColor%
 WinSet, Transparent, 225
 return
 
