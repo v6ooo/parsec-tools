@@ -5,6 +5,7 @@
 ;  Will not be able to prevent input from all apps.
 ;
 ;  Ctrl+Shift+C to activate
+;  Enter to send message, Esc to cancel
 ;
 
 guiPositionX := 10
