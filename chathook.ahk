@@ -29,7 +29,6 @@ if not A_IsAdmin {
 
 #NoEnv
 #SingleInstance Force
-Menu, Tray, Icon, icons\c.ico
 SetKeyDelay, 0, 0
 
 windowClass := "ahk_class Parsec Soda"
