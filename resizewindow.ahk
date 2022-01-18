@@ -48,11 +48,10 @@ GetWindowInfo(HWND) {
 
 setClientSize(winTitle, width, height) {
     WinGet, myHwnd, ID, %winTitle%
-    WinGetPos, myX, myY, myW, myH, %winTitle%
     my := GetWindowInfo(myHwnd)
     newW := width + (my.WindowW - my.ClientW)
     newH := height + (my.WindowH - my.ClientH)
-    WinMove, %winTitle%, , myX, myY, newW, newH
+    WinMove, %winTitle%, , my.WindowX, my.WindowY, newW, newH
 }
 
 traySetSize(width, height) {
