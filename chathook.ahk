@@ -11,12 +11,13 @@
 ;
 
 ;	closeOnSend true|false - If false, you will need press Escape to close
-closeOnSend := false
+closeOnSend := true
 
 guiPositionX := 10
 guiPositionY := 10
 guiWidth := 500
-backgroundColor := "000000"
+transparency := 230
+backgroundColor := "001122"
 fontSize := 14
 fontColor := "00FF00"
 
@@ -29,6 +30,7 @@ if not A_IsAdmin {
 
 #NoEnv
 #SingleInstance Force
+;Menu, Tray, Icon, icons\c.ico
 SetKeyDelay, 0, 0
 
 windowClass := "ahk_class Parsec Soda"
@@ -39,7 +41,7 @@ Gui +LastFound +AlwaysOnTop -Caption +ToolWindow
 Gui, Color, %backgroundColor%, %backgroundColor%
 Gui, Font, s%fontSize%
 Gui, Add, Edit, vMyEdit w%guiWidth% h%inputHeight% c%fontColor% -E0x200
-WinSet, Transparent, 230
+WinSet, Transparent, %transparency%
 return
 
 OnKey(state, iHook, VK, SC) {
@@ -79,8 +81,12 @@ OnEnd(iHook) {
 showChat() {
 	global guiPositionX, guiPositionY
 	Gui, Show, x%guiPositionX% y%guiPositionY% NoActivate, hookInput
+	KeyWait, c
+	KeyWait, Shift
+	KeyWait, Ctrl
 	ih := InputHook("L0")
 	ih.KeyOpt("{All}", "NS")
+	ih.KeyOpt("{CapsLock}", "-NS") ; Temp fix, breaks capture as it rapid fires
 	ih.KeyOpt("{Escape}", "E")
 	ih.OnKeyDown := Func("OnKey").bind(1)
 	ih.OnKeyUp := Func("OnKey").bind(0)
@@ -89,6 +95,6 @@ showChat() {
 	ih.Wait()
 }
 
-#^r::reload
+~#^r::reload
 
 ^+c::showChat()
